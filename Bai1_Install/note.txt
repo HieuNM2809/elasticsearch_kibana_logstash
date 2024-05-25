@@ -1,0 +1,8 @@
+Run : docker-compose up -d
+
+
+---------- Link hướng dẫn
+https://nagasudhir.blogspot.com/2023/09/setup-elasticsearch-in-windows.html
+
+
+
