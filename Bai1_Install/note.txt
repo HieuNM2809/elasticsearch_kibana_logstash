@@ -4,6 +4,7 @@ Down: docker-compose down
 
 ---------- Link hướng dẫn
 https://nagasudhir.blogspot.com/2023/09/setup-elasticsearch-in-windows.html
+https://www.youtube.com/watch?v=1jij1BQon-I&list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J&index=2
 
 
 
