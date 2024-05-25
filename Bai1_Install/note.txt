@@ -1,4 +1,5 @@
 Run : docker-compose up -d
+Down: docker-compose down 
 
 
 ---------- Link hướng dẫn
