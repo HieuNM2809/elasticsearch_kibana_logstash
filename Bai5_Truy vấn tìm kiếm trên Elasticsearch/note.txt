@@ -1,2 +1,6 @@
 
 Link video: https://www.youtube.com/watch?v=SsJjZUSAcFo&list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J&index=4&t=4s
+
+1. Thêm data bằng file
+   -> curl -H "Content-Type: application/json" -XPOST "localhost:9222/shakespeare/_bulk?pretty&refresh" --data-binary "@shakespeare.json"
+   - Lưu ý vào đúng thư mục chứa file shakespeare.json để chạy
