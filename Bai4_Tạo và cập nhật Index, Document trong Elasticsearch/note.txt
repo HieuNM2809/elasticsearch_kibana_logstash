@@ -1,4 +1,62 @@
+
 Link video: https://www.youtube.com/watch?v=JOZ41DtKcNw&list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J&index=6
+
+1, GET /_cat/health?v
+    -> Check Healthy
+
+2, GET /_cat/indices?pretty
+    -> Kiểm tra trong elacticsearch có bao nhiêu indeces (index)
+
+3.1, PUT /product?pretty
+    -> Tạo index
+    (Method /<Tên Index>)
+
+3.2, DELETE /product?pretty
+    ->  Xoá index
+    (Method / <Tên Index>)
+
+4.1, PUT /product/_doc/1
+    {
+      "name"      : "Hieu",
+      "age"       : 18,
+      "interest"  : ["Game","Music"]
+    }
+    -> POST    : Thêm document
+    -> PUT     : Update document
+    -> GET     : Lấy document
+    -> DELETE  : Xoá document
+    - /product/_doc/1 : <Index>/_doc/<id>
+
+4.2, Thêm nhiều document
+    POST /_bulk
+    {"index":{"_index": "product", "_id": 4}}
+    {"name": "ten4", "age":20}
+    {"index":{"_index": "product", "_id":5}}
+    {"name": "ten5","age":20}
+    {"index": {"_index": "product", "_id": 6}}
+    {"name": "ten6", "age":20}
+
+    hoặc
+
+    POST /product/_bulk
+    {"index":{"_id": 7}}
+    {"name": "ten7", "age":20}
+    {"index":{"_id":8}}
+    {"name": "ten8","age":20}
+    {"index": {"_id": 9}}
+    {"name": "ten9", "age":20}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
