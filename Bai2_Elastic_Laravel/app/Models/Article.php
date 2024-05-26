@@ -27,7 +27,7 @@ class Article extends Model
     }
     public static function searchByQuery($query)
     {
-        $client = ClientBuilder::create()->build();
+        $client = ClientBuilder::create()->setHosts(['127.0.0.1:9222'])->build();
 
         $params = [
             'index' => 'articles',
@@ -43,5 +43,5 @@ class Article extends Model
         $response = $client->search($params);
         return $response['hits']['hits'];
     }
-    
+
 }
