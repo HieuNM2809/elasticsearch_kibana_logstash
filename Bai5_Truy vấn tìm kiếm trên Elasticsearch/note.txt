@@ -2,5 +2,55 @@
 Link video: https://www.youtube.com/watch?v=SsJjZUSAcFo&list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J&index=4&t=4s
 
 1. Thêm data bằng file
-   -> curl -H "Content-Type: application/json" -XPOST "localhost:9222/shakespeare/_bulk?pretty&refresh" --data-binary "@shakespeare.json"
-   - Lưu ý vào đúng thư mục chứa file shakespeare.json để chạy
+     -> curl -H "Content-Type: application/json" -XPOST "localhost:9222/shakespeare/_bulk?pretty&refresh" --data-binary "@shakespeare.json"
+     - Lưu ý vào đúng thư mục chứa file shakespeare.json để chạy
+
+2. Tìm kiếm
+     GET /shakespeare/_search
+     {
+       "_source": ["play_name", "speaker"],     -- lấy các cột                         = select
+       "query": {"match_all": {}},              -- search all                          = where
+       "from": 10,                              -- lấy số lượng từ                     = offset
+       "size": 100                              -- số lượng lấy (mặc định là 10 item)  = limit
+     }
+    -> Search all
+
+2. Where
+     GET /shakespeare/_search
+     {
+       "_source": [
+         "play_name",
+         "speaker"
+       ],
+       "query": {
+         "match": {
+           "text_entry": "Enter KING HENRY"    -- where "text_entry" like "%Enter KING HENRY%"
+         }
+       },
+       "size": 100,
+       "from": 10
+     }
+
+2.1, Where nhiều
+        GET /shakespeare/_search
+        {
+          "query": {
+            "bool": {
+              "must": [
+                {
+                  "match": {
+                    "play_name": "Henry IV"
+                  }
+                },
+                {
+                  "match": {
+                    "text_entry": "To his own use he keeps; and sends me word,"
+                  }
+                }
+              ]
+            }
+          }
+        }
+        - must       : cột "play_name" và "text_entry" phải đều có
+        - must_not   : không có 
+        - should     : cột "play_name" và "text_entry" phải có 1 trong hai
