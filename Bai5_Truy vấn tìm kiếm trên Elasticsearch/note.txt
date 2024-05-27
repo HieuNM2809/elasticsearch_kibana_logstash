@@ -52,5 +52,5 @@ Link video: https://www.youtube.com/watch?v=SsJjZUSAcFo&list=PLwJr0JSP7i8AgjUjKn
           }
         }
         - must       : cột "play_name" và "text_entry" phải đều có
-        - must_not   : không có 
+        - must_not   : không có
         - should     : cột "play_name" và "text_entry" phải có 1 trong hai

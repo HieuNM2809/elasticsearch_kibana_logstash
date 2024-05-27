@@ -1,0 +1,12 @@
+
+Link video : https://www.youtube.com/watch?v=OPr2KVc_uzs&list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J&index=5
+Link doc   : https://xuanthulab.net/lap-trinh-chuc-nang-tim-kiem-trong-php-voi-elasticsearch.html#install
+
+1. Chạy server bằng CMD
+   -> php -S localhost:8888
+
+2. Thêm thư viện
+   -> composer require  "elasticsearch/elasticsearch"
+
+3. Nạp vào file PHP thuần để chạy
+   -> require 'vendor/autoload.php';
