@@ -1,4 +1,5 @@
 <?php
+
 use Elasticsearch\Client;
 
 require "vendor/autoload.php";
@@ -33,8 +34,11 @@ $params = [
     'index' => 'article',
 
 ];
-$client->cat()->indices();
+$indicesAll = $client->cat()->indices();
 
+//echo '<pre>';
+//var_dump($indicesAll);
+//echo '</pre>';
 
 
 $act = $_GET['act'] ?? null;
@@ -46,68 +50,26 @@ if ($act == 'create') {
     ];
 
     $exist = $client->indices()->exists($params);
+
     if ($exist) {
         $mgs = "Index - article đã tồn tại - không cần tạo";
-    }
-    else {
-
-
+    } else {
         $params = [
             'index' => 'article',
-
             'body' => [
-                'settings' => [
-                    'number_of_shards' => 1,
-                    'number_of_replicas' => 0,
-                    'analysis' => [
-                        'analyzer' => [ //Lọc loại bỏ thẻ html và index  chuyển đổi không dấu, chữ in thường
-                            'my_analyzer' => [
-                                'type' => 'custom',
-                                'tokenizer' => 'icu_tokenizer',
-                                "char_filter" => [ "html_strip"],
-                                'filter' => ['icu_folding', 'lowercase', 'stop'] //
-                            ],
-
-                        ]
-                    ],
-
-                ],
-            ],
-
-        ];
-
-        $response = $client->indices()->create($params);
-
-
-        $params = [
-            'index' => 'article',
-            'type' => 'article_type',
-            'include_type_name' => true,
-            'body' => [
-                'article_type' => [
-
+                'mappings' => [
                     'properties' => [
-                        'title' => [
-                            'type' => 'text',
-                            'analyzer' => 'my_analyzer'
-                        ],
-
+                        'title' => ['type' => 'text', 'analyzer' => 'standard'],
+                        'body' => ['type' => 'text', 'analyzer' => 'standard'],
+                        'tags' => ['type' => 'text', 'analyzer' => 'standard'],
                     ]
                 ]
             ]
         ];
-
-
-
-        $response = $client->indices()->putMapping($params);
-
-        $mgs = "Index - articl mới được tạo";
+        $client->indices()->create($params);
+        $mgs = "Index - article mới được tạo";
     }
-
-
-
-}
-else if ($act == 'delete') {
+} elseif ($act == 'delete') {
     // Xóa index:article
     $params = [
         'index' => 'article'
@@ -117,9 +79,8 @@ else if ($act == 'delete') {
     if ($exist) {
         $rs = $client->indices()->delete($params);
         $mgs = "Đã xóa index - article";
-    }
-    else {
-        $mgs = "Index - articl không tồn tại";
+    } else {
+        $mgs = "Index - article không tồn tại";
     }
 
 }
@@ -132,12 +93,12 @@ $exist = $client->indices()->exists(['index' => 'article']);
 <div class="card m-4">
     <div class="card-header display-4 text-danger">Quản lý Index</div>
     <div class="card-body">
-        <? if (!$exist):?>
+        <?php if (!$exist): ?>
             <a href="http://localhost:8888/?page=manageindex&act=create" class="btn btn-primary">Tạo index <strong>article</strong></a>
-        <? else:?>
+        <?php else: ?>
             <a href="http://localhost:8888/?page=manageindex&act=delete" class="btn btn-danger">Xóa index <strong>article</strong></a>
-        <? endif;?>
+        <?php endif; ?>
 
-        <div class="alert alert-danger mt-4"><?=$mgs?></div>
+        <div class="alert alert-danger mt-4"><?= $mgs ?></div>
     </div>
 </div>
