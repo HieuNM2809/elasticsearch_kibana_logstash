@@ -4,27 +4,19 @@ use Elasticsearch\Client;
 
 require "vendor/autoload.php";
 
-$hosts = [
-    [
-        'host' => '127.0.0.1',
-        'port' => '9222',
-        'scheme' => 'http',
-    ]
-];
+$config = require './config/elastic.php';
+$hosts = $config['elasticsearch']['hosts'];
 
 $client = \Elasticsearch\ClientBuilder::create()
     ->setHosts($hosts)
     ->build();
 
 /*
-
     Document {
         title: data,
         content: data,
         keywords: data
     }
-
-
     article_type:
        title: string|analyzer=
  */
@@ -82,12 +74,9 @@ if ($act == 'create') {
     } else {
         $mgs = "Index - article không tồn tại";
     }
-
 }
 
-
 $exist = $client->indices()->exists(['index' => 'article']);
-
 ?>
 
 <div class="card m-4">
