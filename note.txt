@@ -1,4 +1,5 @@
-Link playlist: https://www.youtube.com/playlist?list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J
+Link playlist      : https://www.youtube.com/playlist?list=PLwJr0JSP7i8AgjUjKnecVUN2i3txuS-1J
+Link instal ubuntu : https://www.digitalocean.com/community/tutorials/how-to-install-elasticsearch-logstash-and-kibana-elastic-stack-on-ubuntu-22-04
 
 
 1. Chạy server bằng CMD
