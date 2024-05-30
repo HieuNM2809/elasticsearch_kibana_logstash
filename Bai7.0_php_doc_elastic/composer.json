@@ -1,0 +1,10 @@
+{
+    "require": {
+        "elasticsearch/elasticsearch": "^8.13"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
