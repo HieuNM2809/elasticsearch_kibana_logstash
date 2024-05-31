@@ -26,6 +26,7 @@ Link video: https://www.youtube.com/watch?v=JOZ41DtKcNw&list=PLwJr0JSP7i8AgjUjKn
     -> GET     : Lấy document
     -> DELETE  : Xoá document
     - /product/_doc/1 : <Index>/_doc/<id>
+    - Nếu không /1 thì là Id Random
 
 4.2, Thêm nhiều document
     POST /_bulk
